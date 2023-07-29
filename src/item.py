@@ -27,9 +27,19 @@ class Item:
     def __str__(self):
         return self.__name
 
+    def __add__(self, other):
+        if not issubclass(other.__class__, self.__class__):
+            raise ValueError('Экземпляр должен быть класса: Phone или Item')
+        return self.quantity + other.quantity
+
+    def __radd__(self, other):
+        if not issubclass(other.__class__, self.__class__):
+            raise ValueError('Экземпляр должен быть класса: Phone или Item')
+        return other.quantity + self.quantity
+
     @property
     def name(self):
-        return 'self.__name'
+        return self.__name
 
     @name.setter
     def name(self, name):
@@ -70,6 +80,3 @@ class Item:
         """
         self.price *= self.pay_rate
         return self.price
-
-
-Item.instantiate_from_csv()
