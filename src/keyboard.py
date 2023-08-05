@@ -11,11 +11,12 @@ class MixinLang:
         return self.__language
 
     def change_lang(self):
-        if self.__language == "EN":
-            self.__language = "RU"
-            return self.__language
-        self.__language = "EN"
+        """Возвращает новое множество, содержащее только тот языковой код,
+           который отсутствует в переменной self.__language"""
+
+        self.__language = ({"RU", "EN"} - {self.__language}).pop()
         return self
+
 
 
 class Keyboard(MixinLang, Item):
